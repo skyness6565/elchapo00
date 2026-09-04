@@ -7,7 +7,6 @@ import {
   Mail,
   MapPin,
   MessageSquare,
-  Phone,
 } from "lucide-react";
 import {
   Accordion,
@@ -21,7 +20,7 @@ import supportAgent from "@/assets/support-agent.jpg";
 
 const title = "Contact & Support — Heritage Bank";
 const description =
-  "Reach Heritage Bank 24/7: live support, email, telephone and secure messaging. Head office address, business hours, departments and frequently asked questions.";
+  "Reach Heritage Bank 24/7: live support, email and secure messaging. Head office address, business hours, departments and frequently asked questions.";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -40,17 +39,17 @@ export const Route = createFileRoute("/contact")({
 const SUPPORT = [
   { icon: Headphones, title: "24/7 Live Support", text: "Chat with a Heritage Bank specialist any hour of any day, including holidays." },
   { icon: Mail, title: "Email Support", text: "Write to nelsonthunder100@gmail.com — most enquiries answered within 4 hours." },
-  { icon: Phone, title: "WhatsApp & Phone", text: "Message or call +1 (646) 439-3823 for account, card and fraud assistance." },
+  { icon: Mail, title: "Email a Specialist", text: "Write to nelsonthunder100@gmail.com for account, card and fraud assistance." },
   { icon: Lock, title: "Secure Messaging", text: "Send documents and sensitive requests safely from inside online banking." },
 ];
 
 const FAQ = [
   { q: "How do I open a Heritage Bank account?", a: "Apply online in about 10 minutes with a government ID and proof of address, or visit any of our 1,240 branches. Most accounts are approved the same business day." },
   { q: "Is my money insured?", a: "Yes. Heritage Bank is a member of the FDIC and eligible deposits are insured up to $250,000 per depositor, per ownership category." },
-  { q: "What should I do if I suspect fraud?", a: "Freeze your card instantly in the mobile app and call our Fraud Prevention team on +1 (646) 439-3823. We monitor accounts 24/7 and will investigate immediately." },
+  { q: "What should I do if I suspect fraud?", a: "Freeze your card instantly in the mobile app and email our Fraud Prevention team at nelsonthunder100@gmail.com. We monitor accounts 24/7 and will investigate immediately." },
   { q: "How long do international transfers take?", a: "Transfers to our 180+ supported countries typically settle the same day, with a maximum of two business days for some corridors." },
   { q: "Can I get pre-approved for a mortgage?", a: "Yes. Pre-approval decisions are usually issued within 48 hours once income and identity documents are received." },
-  { q: "How do I reset my online banking password?", a: "Select 'Forgot password' on the login screen and verify with your registered phone or email. Support can also verify you by phone." },
+  { q: "How do I reset my online banking password?", a: "Select 'Forgot password' on the login screen and verify with your registered email address. Support can also verify you over email." },
 ];
 
 const DEPARTMENTS = [
@@ -108,23 +107,12 @@ function ContactPage() {
 
           <Reveal delay={110}>
             <div className="h-full rounded-xl border border-border/70 bg-background/40 p-8">
-              <Phone className="h-6 w-6 text-primary" />
-              <h3 className="mt-5 text-lg font-bold text-foreground">Phone & Email</h3>
+              <Mail className="h-6 w-6 text-primary" />
+              <h3 className="mt-5 text-lg font-bold text-foreground">Email Support</h3>
               <div className="mt-4 space-y-2 text-sm">
-                <a href="tel:+16464393823" className="block text-primary hover:underline">
-                  +1 (646) 439-3823
-                </a>
-                <a
-                  href="https://wa.me/16464393823"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-muted-foreground transition-colors hover:text-primary"
-                >
-                  WhatsApp: +1 (646) 439-3823
-                </a>
                 <a
                   href="mailto:nelsonthunder100@gmail.com"
-                  className="block text-muted-foreground transition-colors hover:text-primary"
+                  className="block text-primary hover:underline"
                 >
                   nelsonthunder100@gmail.com
                 </a>
@@ -139,7 +127,7 @@ function ContactPage() {
               <div className="mt-4 space-y-1 text-sm text-muted-foreground">
                 <div>Monday – Friday</div>
                 <div className="text-foreground">8:00 AM – 6:00 PM</div>
-                <div className="pt-2">Live chat and phone support available 24/7.</div>
+                <div className="pt-2">Live chat and email support available 24/7.</div>
               </div>
             </div>
           </Reveal>

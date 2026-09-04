@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { MessageCircle, X, Mail, Phone } from "lucide-react";
+import { MessageCircle, X, Mail } from "lucide-react";
 
-const WHATSAPP = "16464393823";
 const EMAIL = "nelsonthunder100@gmail.com";
 
 export function SupportFab() {
@@ -25,14 +24,6 @@ export function SupportFab() {
           <p className="text-sm font-semibold text-foreground">24/7 Customer Support</p>
           <p className="mt-1 text-xs text-muted-foreground">We usually reply within minutes.</p>
           <div className="mt-3 space-y-2">
-            <a
-              href={`https://wa.me/${WHATSAPP}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-md border border-border/60 px-3 py-2 text-sm text-foreground transition-colors hover:border-primary/60 hover:text-primary"
-            >
-              <Phone className="h-4 w-4" /> WhatsApp us
-            </a>
             <a
               href={`mailto:${EMAIL}`}
               className="flex items-center gap-2 rounded-md border border-border/60 px-3 py-2 text-sm text-foreground transition-colors hover:border-primary/60 hover:text-primary"

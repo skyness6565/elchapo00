@@ -23,14 +23,6 @@ export function Footer() {
               >
                 nelsonthunder100@gmail.com
               </a>
-              <a
-                href="https://wa.me/16464393823"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block transition-colors hover:text-primary"
-              >
-                WhatsApp: +1 (646) 439-3823
-              </a>
             </address>
           </div>
           {COLUMNS.map((column) => (
