@@ -13,8 +13,6 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { supabase } from "@/integrations/supabase/client";
 import { Toaster } from "@/components/ui/sonner";
-import { Smartsupp } from "@/components/site/Smartsupp";
-import { SupportFab } from "@/components/site/SupportFab";
 
 
 function NotFoundComponent() {
@@ -136,8 +134,6 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
-      <Smartsupp />
-      <SupportFab />
       <Toaster position="top-right" richColors />
     </QueryClientProvider>
   );
