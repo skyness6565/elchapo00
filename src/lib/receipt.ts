@@ -48,7 +48,7 @@ function footer(doc: jsPDF) {
   doc.setFontSize(8);
   doc.setTextColor(...GREY);
   doc.text(
-    "Heritage Bank · 8001 South Orange Blossom Trail, Orlando, FL 32809 · nelsonthunder100@gmail.com",
+    "Heritage Bank · 8001 South Orange Blossom Trail, Orlando, FL 32809 · heritagebsupport@gmail.com",
     105,
     281,
     { align: "center" },
