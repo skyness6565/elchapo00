@@ -18,10 +18,10 @@ export function Footer() {
             <address className="mt-5 space-y-2 text-sm text-muted-foreground not-italic">
               <div>8001 South Orange Blossom Trail, Orlando, FL 32809</div>
               <a
-                href="mailto:nelsonthunder100@gmail.com"
+                href="mailto:heritagebsupport@gmail.com"
                 className="block transition-colors hover:text-primary"
               >
-                nelsonthunder100@gmail.com
+                heritagebsupport@gmail.com
               </a>
             </address>
           </div>

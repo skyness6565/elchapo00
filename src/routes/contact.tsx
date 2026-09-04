@@ -38,15 +38,15 @@ export const Route = createFileRoute("/contact")({
 
 const SUPPORT = [
   { icon: Headphones, title: "24/7 Live Support", text: "Chat with a Heritage Bank specialist any hour of any day, including holidays." },
-  { icon: Mail, title: "Email Support", text: "Write to nelsonthunder100@gmail.com — most enquiries answered within 4 hours." },
-  { icon: Mail, title: "Email a Specialist", text: "Write to nelsonthunder100@gmail.com for account, card and fraud assistance." },
+  { icon: Mail, title: "Email Support", text: "Write to heritagebsupport@gmail.com — most enquiries answered within 4 hours." },
+  { icon: Mail, title: "Email a Specialist", text: "Write to heritagebsupport@gmail.com for account, card and fraud assistance." },
   { icon: Lock, title: "Secure Messaging", text: "Send documents and sensitive requests safely from inside online banking." },
 ];
 
 const FAQ = [
   { q: "How do I open a Heritage Bank account?", a: "Apply online in about 10 minutes with a government ID and proof of address, or visit any of our 1,240 branches. Most accounts are approved the same business day." },
   { q: "Is my money insured?", a: "Yes. Heritage Bank is a member of the FDIC and eligible deposits are insured up to $250,000 per depositor, per ownership category." },
-  { q: "What should I do if I suspect fraud?", a: "Freeze your card instantly in the mobile app and email our Fraud Prevention team at nelsonthunder100@gmail.com. We monitor accounts 24/7 and will investigate immediately." },
+  { q: "What should I do if I suspect fraud?", a: "Freeze your card instantly in the mobile app and email our Fraud Prevention team at heritagebsupport@gmail.com. We monitor accounts 24/7 and will investigate immediately." },
   { q: "How long do international transfers take?", a: "Transfers to our 180+ supported countries typically settle the same day, with a maximum of two business days for some corridors." },
   { q: "Can I get pre-approved for a mortgage?", a: "Yes. Pre-approval decisions are usually issued within 48 hours once income and identity documents are received." },
   { q: "How do I reset my online banking password?", a: "Select 'Forgot password' on the login screen and verify with your registered email address. Support can also verify you over email." },
@@ -111,10 +111,10 @@ function ContactPage() {
               <h3 className="mt-5 text-lg font-bold text-foreground">Email Support</h3>
               <div className="mt-4 space-y-2 text-sm">
                 <a
-                  href="mailto:nelsonthunder100@gmail.com"
+                  href="mailto:heritagebsupport@gmail.com"
                   className="block text-primary hover:underline"
                 >
-                  nelsonthunder100@gmail.com
+                  heritagebsupport@gmail.com
                 </a>
               </div>
             </div>
@@ -144,7 +144,7 @@ function ContactPage() {
                   <span className="font-medium text-foreground">{dept}</span>
                 </div>
                 <a
-                  href="mailto:nelsonthunder100@gmail.com"
+                  href="mailto:heritagebsupport@gmail.com"
                   className="text-sm text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                 >
                   Contact
@@ -182,7 +182,7 @@ function ContactPage() {
               minutes, day or night.
             </p>
             <a
-              href="mailto:nelsonthunder100@gmail.com"
+              href="mailto:heritagebsupport@gmail.com"
               className="mt-8 inline-flex items-center rounded-md bg-primary px-8 py-3 text-sm font-medium text-primary-foreground transition-all duration-300 hover:opacity-90 hover:shadow-lg"
             >
               Message Support
