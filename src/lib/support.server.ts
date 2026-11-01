@@ -23,8 +23,9 @@ export async function telegramSend(text: string) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ chat_id: supportChatId, text, reply_markup: { force_reply: true } }),
+    signal: AbortSignal.timeout(15000),
   });
-  const result = await response.json() as { ok: boolean; description?: string; result?: { message_id: number } };
+  const result = await response.json().catch(() => ({ ok: false })) as { ok: boolean; description?: string; result?: { message_id: number } };
   if (!response.ok || !result.ok || !result.result) {
     // Do not log the request URL: Telegram includes the private bot token in it.
     throw new Error(`Telegram support [${response.status}]: ${result.description ?? 'Message delivery failed'}`);

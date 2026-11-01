@@ -17,7 +17,10 @@ export const Route = createFileRoute('/api/public/telegram/webhook')({
     if (!token) return new Response('Unavailable', { status: 503 });
     const { validWebhook, supportChatId } = await import('@/lib/support.server');
     if (!validWebhook(request.headers.get('X-Telegram-Bot-Api-Secret-Token') ?? '', token)) return new Response('Unauthorized', { status: 401 });
-    const update = updateSchema.safeParse(await request.json().catch(() => null));
+    if (Number(request.headers.get('content-length')) > 65536) return new Response('Update too large', { status: 413 });
+    const body = await request.text();
+    if (new TextEncoder().encode(body).length > 65536) return new Response('Update too large', { status: 413 });
+    const update = updateSchema.safeParse((() => { try { return JSON.parse(body); } catch { return null; } })());
     if (!update.success) return new Response('Invalid update', { status: 400 });
     const message = update.data.message;
     if (!message?.text?.trim() || !message.reply_to_message || String(message.chat.id) !== supportChatId) return Response.json({ ok: true, ignored: true });
