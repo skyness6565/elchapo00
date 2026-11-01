@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CheckCircle2, Loader2, Search, Send } from "lucide-react";
 import { toast } from "sonner";
@@ -25,27 +25,33 @@ export function SendMoney({ profile }: { profile: Profile }) {
   const [reference, setReference] = useState("");
   const [step, setStep] = useState<"form" | "confirm" | "done">("form");
   const [otpOpen, setOtpOpen] = useState(false);
+  const searchVersion = useRef(0);
 
   async function search() {
     if (term.trim().length < 3) {
       toast.error("Enter at least 3 characters");
       return;
     }
+    const version = ++searchVersion.current;
     setSearching(true);
-    const { data, error } = await supabase.rpc("find_recipient", { _query: term.trim() });
-    setSearching(false);
-    if (error) {
-      toast.error(error.message);
-      return;
+    try {
+      const { data, error } = await supabase.rpc("find_recipient", { _query: term.trim() });
+      if (version !== searchVersion.current) return;
+      if (error) throw error;
+      setResults((data ?? []) as Recipient[]);
+      if (!data?.length) toast.error("No Heritage Bank customer found");
+    } catch {
+      if (version === searchVersion.current) toast.error("Recipient search failed. Please try again.");
+    } finally {
+      if (version === searchVersion.current) setSearching(false);
     }
-    setResults((data ?? []) as Recipient[]);
-    if (!data?.length) toast.error("No Heritage Bank customer found");
   }
 
   const transfer = useMutation({
     mutationFn: async (otp: string) => {
+      if (!recipient) throw new Error("Select a recipient first");
       const { error } = await supabase.rpc("send_money", {
-        _recipient_account: recipient!.account_number,
+        _recipient_account: recipient.account_number,
         _amount: Number(amount),
         _description: description || undefined,
         _reference: reference || undefined,
@@ -150,11 +156,11 @@ export function SendMoney({ profile }: { profile: Profile }) {
         <div className="flex gap-2">
           <Input
             value={term}
-            onChange={(event) => setTerm(event.target.value)}
+            onChange={(event) => { searchVersion.current += 1; setSearching(false); setResults([]); setRecipient(null); setTerm(event.target.value); }}
             onKeyDown={(event) => event.key === "Enter" && search()}
             placeholder="e.g. 0123456789"
           />
-          <Button type="button" variant="secondary" onClick={search} disabled={searching}>
+          <Button type="button" variant="secondary" onClick={search} disabled={searching} aria-label="Search recipient" title="Search recipient">
             {searching ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
           </Button>
         </div>
