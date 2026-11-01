@@ -215,6 +215,62 @@ export type Database = {
         }
         Relationships: []
       }
+      support_chat_messages: {
+        Row: {
+          body: string
+          conversation_id: string
+          created_at: string
+          id: string
+          sender: string
+          telegram_message_id: number | null
+          telegram_update_id: number | null
+        }
+        Insert: {
+          body: string
+          conversation_id: string
+          created_at?: string
+          id?: string
+          sender: string
+          telegram_message_id?: number | null
+          telegram_update_id?: number | null
+        }
+        Update: {
+          body?: string
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          sender?: string
+          telegram_message_id?: number | null
+          telegram_update_id?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "support_chat_messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "support_conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      support_conversations: {
+        Row: {
+          access_hash: string
+          created_at: string
+          id: string
+        }
+        Insert: {
+          access_hash: string
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          access_hash?: string
+          created_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
       transactions: {
         Row: {
           amount: number
