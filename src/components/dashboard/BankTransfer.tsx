@@ -22,6 +22,7 @@ type Form = Record<string, string>;
 export function BankTransfer({ profile }: { profile: Profile }) {
   const queryClient = useQueryClient();
   const [receipt, setReceipt] = useState<Transaction | null>(null);
+  const [receiptUnavailable, setReceiptUnavailable] = useState(false);
   const [local, setLocal] = useState<Form>({
     bank_name: "",
     account_number: "",
@@ -72,7 +73,7 @@ export function BankTransfer({ profile }: { profile: Profile }) {
       if (error) throw error;
 
       if (saveBeneficiary) {
-        await supabase.from("beneficiaries").insert({
+        const { error: beneficiaryError } = await supabase.from("beneficiaries").insert({
           user_id: profile.id,
           name: form.account_name,
           account_number: form.account_number,
@@ -82,15 +83,18 @@ export function BankTransfer({ profile }: { profile: Profile }) {
           iban: form.iban || null,
           kind,
         });
+        if (beneficiaryError) toast.warning("Transfer completed, but the beneficiary could not be saved.");
       }
 
       const id = (data as { id: string }).id;
-      const { data: tx } = await supabase.from("transactions").select("*").eq("id", id).single();
+      const { data: tx, error: receiptError } = await supabase.from("transactions").select("*").eq("id", id).single();
+      if (receiptError || !tx) return null;
       return tx as Transaction;
     },
     onSuccess: (tx) => {
       setOtpKind(null);
       setReceipt(tx);
+      setReceiptUnavailable(!tx);
       queryClient.invalidateQueries({ queryKey: ["profile"] });
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
       queryClient.invalidateQueries({ queryKey: ["beneficiaries"] });
@@ -98,6 +102,15 @@ export function BankTransfer({ profile }: { profile: Profile }) {
     },
     onError: (error: Error) => toast.error(error.message),
   });
+
+  if (receiptUnavailable) {
+    return <div className="rounded-xl border border-border/50 bg-card p-8 text-center">
+      <CheckCircle2 className="mx-auto size-10 text-primary" />
+      <h3 className="mt-4 text-2xl font-bold">Transfer Completed</h3>
+      <p className="mt-3 text-muted-foreground">Your transfer succeeded. The receipt is temporarily unavailable; check Transaction History. Do not repeat this transfer.</p>
+      <Button variant="ghost" className="mt-4" onClick={() => setReceiptUnavailable(false)}>New transfer</Button>
+    </div>;
+  }
 
   if (receipt) {
     return (

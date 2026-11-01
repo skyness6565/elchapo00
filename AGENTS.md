@@ -13,3 +13,4 @@
 - Support conversations use random browser-held capabilities stored only as hashes server-side; service-only tables prevent visitors from accessing other chats.
 - Telegram requests use the explicitly supplied plain project bot secret server-side; webhook signatures and the configured support chat must both match before replies are stored.
 - Match Telegram support replies by the original outgoing message ID and deduplicate update IDs so each reply reaches only its own visitor.
+- Support polling is serialized and ignores stale reads during sends; delivered messages and successful transfers must never be reported as failed merely because receipt/history loading failed.
