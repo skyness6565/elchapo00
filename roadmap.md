@@ -1,4 +1,5 @@
 # Telegram support
+- [ ] Fix detected chat bugs and verify smooth loading, sending, scrolling and page navigation.
 - [x] Add small bottom-right chat with sending, reply display and email fallback.
 - [x] Secure message storage and implement signed Telegram webhook.
 - [ ] Register webhook: stable public preview endpoint currently returns 404; must become reachable before registration.
